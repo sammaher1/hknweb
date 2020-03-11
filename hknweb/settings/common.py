@@ -210,4 +210,6 @@ PRODEV_EVENT = 'prodev'
 HANGOUT_EVENT = 'hangout'
 BITBYTE_ACTIVITY = 'bitbyte'
 
+SAHAI_EMAIL = 'sahai@eecs.eecs.eecs.berkeley.edu'
+
 # Note: both candidate and officer group should have permission to add officer challenges

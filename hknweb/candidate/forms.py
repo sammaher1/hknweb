@@ -12,7 +12,7 @@ class ChallengeRequestForm(forms.ModelForm):
 
     class Meta:
         model = OffChallenge
-        fields = ['name', 'officer', 'description', 'proof']
+        fields = ['name', 'officer', 'description', 'proof', 'opt_out_sahai']
         widgets = {
             'officer': autocomplete.ModelSelect2(url='candreq/autocomplete')
         }

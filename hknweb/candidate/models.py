@@ -38,6 +38,7 @@ class OffChallenge(models.Model):
     officer_confirmed = models.BooleanField(null=True)
     # whether corresponding secretary or other admin has confirmed this request, null when unreviewed
     csec_confirmed    = models.BooleanField(null=True)
+    opt_out_sahai     = models.BooleanFIeld(null=False)
     request_date      = models.DateTimeField(auto_now_add=True)
 
     @property

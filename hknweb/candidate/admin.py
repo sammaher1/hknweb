@@ -10,10 +10,10 @@ import csv
 
 class OffChallengeAdmin(admin.ModelAdmin):
 
-    fields = ['requester', 'officer', 'name', 'officer_confirmed', 'csec_confirmed', 'description', 'proof', 'officer_comment', 'request_date']
+    fields = ['requester', 'officer', 'name', 'officer_confirmed', 'csec_confirmed', 'opt_out_sahai', 'description', 'proof', 'officer_comment', 'request_date']
     readonly_fields = ['request_date']
-    list_display = ('name', 'requester', 'officer', 'officer_confirmed', 'csec_confirmed', 'request_date')
-    list_filter = ['requester', 'officer', 'officer_confirmed', 'csec_confirmed', 'request_date']
+    list_display = ('name', 'requester', 'officer', 'officer_confirmed', 'csec_confirmed', 'opt_out_sahai', 'request_date')
+    list_filter = ['requester', 'officer', 'officer_confirmed', 'csec_confirmed', 'opt_out_sahai', 'request_date']
     search_fields = ['requester__username', 'requester__first_name', 'requester__last_name', 'officer__username', 'officer__first_name', 'officer__last_name', 'name']
     autocomplete_fields = ['requester', 'officer']
 

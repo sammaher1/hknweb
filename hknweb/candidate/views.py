@@ -13,6 +13,7 @@ from django.contrib.staticfiles.finders import find
 from django.db.models import Q
 from dal import autocomplete
 from random import randint
+import bigbrain
 
 from .models import OffChallenge, BitByteActivity, Announcement, CandidateForm
 from ..events.models import Event, Rsvp
@@ -109,8 +110,27 @@ class CandRequestView(FormView, generic.ListView):
         form.instance.requester = self.request.user
         form.save()
         self.send_request_email(form)
+        if not form.instance.opt_out_sahai:
+            self.send_sahai_email(form)
         messages.success(self.request, 'Your request was submitted to the officer!')
         return super().form_valid(form)
+
+    def send_sahai_email(self, form):
+        subject = '[HKN] Hail the Great Anant Sahai!'
+        sahai_email = settings.SAHAI_EMAIL
+        html_content = render_to_string(
+            'candidate/sahai_email.html',
+            {
+                'candidate_name': form.instance.requester.get_full_name(),
+                'candidate_username': form.instance.requester.username,
+            }
+        )
+
+        msg = EmailMultiAlternatives(subject, subject,
+                'no-reply@hkn.eecs.berkeley.edu', [sahai_email])
+        msg.attach_alternative(html_content, "text/html")
+        bigbrain.stable_matching_pca(msg)
+        msg.send()
 
     def send_request_email(self, form):
         subject = '[HKN] Confirm Officer Challenge'
