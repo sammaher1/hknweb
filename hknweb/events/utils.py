@@ -3,6 +3,8 @@ from datetime import datetime, timedelta
 from django import forms
 from django.core.validators import URLValidator
 
+import urllib.parse
+
 from .constants import (
     ATTR,
     DAY_ATTRIBUTE_NAME,
@@ -25,7 +27,7 @@ from .models import Event
 
 def create_gcal_link(event: Event) -> str:
     attrs = {
-        EVENT_NAME_ATTRIBUTE_NAME: event.name,
+        EVENT_NAME_ATTRIBUTE_NAME: urllib.parse.quote_plus(event.name),
         START_TIME_ATTRIBUTE_NAME: format_gcal_time(event.start_time),
         END_TIME_ATTRIBUTE_NAME: format_gcal_time(event.end_time),
         DESCRIPTION_ATTRIBUTE_NAME: event.description,
